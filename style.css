@@ -1,0 +1,59 @@
+
+header {
+    text-align: center;
+    font-size: 40px;
+}
+
+
+h1 {
+    border-width: 100%;
+    height: 50px;
+    color: blue;
+    text-align: center;
+}
+#left-box {
+    float: left;
+    width: 30%;
+    height: 500px;
+    border: 1px solid black;
+    padding: 10px;
+
+
+}
+#right-box {
+    float: left;
+    width: 70%;
+    height: 500px;
+    border: 1px solid black;
+    padding: 10px;
+}
+#weather-view {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    margin: auto;
+}
+#title {
+    width: 100%;
+    height: 15px;
+    margin: 15px;
+}
+.card {
+    margin:20px 10px;
+}
+.card-body {
+    font-size: small;
+    width: 100%;
+    height: 180px;
+}
+p{
+  margin: 0;
+  padding:0;
+}
+img {
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 60px;
+    height: 60px;
+}

@@ -4,44 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <link href="style.css">
+    <link rel="stylesheet" href="style.css">
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    
-    <div class="rightSide">
-        <div class="searchBar">
-
-        </div>
-        <div class="previousCitiesList">
-
-        </div>
-        </div>
-
+    <header>
+        Weather Dashboard
+    </header>
     <div class="leftSide">
-        <section class="currentData">
-            <p id="temp"> </p>
-
-            <p id="humidity"> </p>
-
-            <p id="windSpeed"> </p>
-
-            <p id="uvIndex"> </p>
-        </section>
-
-        <section class="5day">
-            <div id="day1"></div>
-            <div id="day2"></div>
-            <div id="day3"></div>
-            <div id="day4"></div>
-            <div id="day5"></div>
-
-        </section>
+        <div class="searchBar">  
+            <div class="container-fluid">
+            <div class="row">
+              <aside class="col-lg-3 bg-light">
+                <h5 class="mt-1">City Search:</h5>
+                <div class="form-inline form-group">
+                  <input class="form-control" type="text" id="search-value" />
+                  <button class="btn btn-primary" id="search-btn"> <i class="fa fa-search"></i> </button>
+                </div>
+        
+                <ul class="list-group history"></ul>
+              </aside>
+        
+              <div class="col-lg-9">
+                <div id="today" class="mt-3"></div>
+                <div id="forecast" class="mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul id="previousCitiesList">
+            <li class="previousCity"></li>
+        </ul>
+        <div class="previousCitiesList"></div>
     </div>
-
 
 
 <script src="script.js"></script>
