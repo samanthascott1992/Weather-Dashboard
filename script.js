@@ -1,7 +1,8 @@
 
 $(document).ready(function () {
 
-    var history = JSON.parse(window.localStorage.getItem("history")) || [];
+
+var history = JSON.parse(window.localStorage.getItem("history")) || [];
 
     $("#search-btn").on("click", function () {
 
@@ -18,7 +19,7 @@ $(document).ready(function () {
     function makeRow(text) {
 
        var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
-       $(".history").append(li);
+       $(".history").prepend(li);
 
     }
 
@@ -43,17 +44,31 @@ $(document).ready(function () {
                     makeRow(searchValue)
                 }
 
-
+                var currentDay = new Date().toString().substr(0, 15);
+                
                 var card = $("<div>").addClass("card");
+                var date = $("<h3>").addClass("card-text").text(searchValue + " " + currentDay);
                 var wind = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
                 var humid = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
                 var temp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + " degrees");
-                // var uvIndex = $("<p>").addClass("card-text").text("UV Index " + response.uv.index);
-                var cardBody = $("<div>").addClass("card-body");
 
-                cardBody.append(temp, humid, wind);
+                var cardBody = $("<div>").addClass("card-body");
+                cardBody.append(date,temp, humid, wind);
+
+                var uvQueryUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=" + yourApiKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon;
+                $.ajax({
+                    type: "GET",
+                    url: uvQueryUrl,
+                    dataType: "JSON", success: function(uvData) {
+                        
+                        var uvIndex = $("<p>").addClass("card-text").text("UV Index " + uvData.value);
+                        cardBody.append(uvIndex);
+                    }
+                })
+
                 card.append(cardBody);
-                $("#today").append(card);
+                $("#today").prepend(card);
+              
 
                 getForecast(searchValue);
 
@@ -74,7 +89,7 @@ $(document).ready(function () {
             url: queryUrl,
             dataType: "JSON", success: function (response) {
 
-            $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast:</h4").append("<div class=\"row\">")
+            $("#forecast").html("<h4 class=\"mt-3\">5-Day Forecast for: </h4>" + searchValue).append("<div class=\"row\">")
 
 
             for(var i=0; i< response.list.length; i++) {
@@ -83,15 +98,17 @@ $(document).ready(function () {
 
                 {
 
-                    
+                    console.log(response);
                     var col = $("<div>").addClass("col-md-2")
                     var card = $("<div>").addClass("card bg-primary text-white")
                     var body = $("<div>").addClass("card-body p-2")
+                    var date = $("<p>").addClass("date").text(response.list[i].dt_txt.substr(0,10))
+                    var icon = $("<img>").addClass("card-text").attr("src", "http://openweathermap.org/img/w/" + response.list[i].weather[0].icon + ".png" )
                     var p1= $("<p>").addClass("card-text").text("Temperature " + response.list[i].main.temp_max)
                     var p2= $("<p>").addClass("card-text").text("Humidity " + response.list[i].main.humidity)
-                //    var icon = $("<p>").addClass("card-text").text(response.weather.icon)
 
-                    col.append(card.append(body.append(p1, p2)))
+                    body.append(icon)
+                    col.append(card.append(body.append(date, icon, p1, p2)))
 
                     $("#forecast .row").append(col)
 
