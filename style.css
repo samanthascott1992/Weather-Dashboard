@@ -40,7 +40,7 @@ h1 {
 }
 .card {
     margin:20px 10px;
-    height: 300px;
+    height: 200px;
 }
 .card-body {
     font-size: small;
@@ -59,7 +59,7 @@ img {
     height: 60px;
 }
 .icon2 {
-    margin: 0;
+    margin: auto;
     width: 40px;
     height: 30px;
 }

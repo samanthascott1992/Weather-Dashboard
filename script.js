@@ -47,7 +47,7 @@ $(document).ready(function () {
 
                     window.localStorage.setItem("history", JSON.stringify(history))
 
-                    // makeRow($("<span>").addClass("btn btn-lg").text(history).click("currentDay"))
+                    makeRow($("<span>").addClass("btn btn-lg").text(history).click("currentDay"))
                 }
 
                 var currentDay = new Date().toString().substr(0, 15);
