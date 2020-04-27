@@ -47,14 +47,14 @@ $(document).ready(function () {
 
                     window.localStorage.setItem("history", JSON.stringify(history))
 
-                    makeRow(searchValue)
+                    // makeRow($("<span>").addClass("btn btn-lg").text(history).click("currentDay"))
                 }
 
                 var currentDay = new Date().toString().substr(0, 15);
                 
                 var card = $("<div>").addClass("card");
                 var date = $("<h3>").addClass("card-text").text(searchValue + " " + currentDay);
-                var icon = $("<img>").addClass("card-text").attr("src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png" )
+                var icon = $("<img>").addClass("card-text icon2").attr("src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png" )
                 var wind = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
                 var humid = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
                 var temp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + " degrees");
