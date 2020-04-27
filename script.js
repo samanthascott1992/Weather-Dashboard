@@ -2,7 +2,13 @@
 $(document).ready(function () {
 
 
-var history = JSON.parse(window.localStorage.getItem("history")) || [];
+    var history = JSON.parse(window.localStorage.getItem("history"))||[]
+    if (history.length > 0){
+        searchWeather(history[history.length -1])
+    }
+    for (var i = 0; i < history.length; i++){
+        makeRow(history[i])
+    }
 
     $("#search-btn").on("click", function () {
 
@@ -48,23 +54,35 @@ var history = JSON.parse(window.localStorage.getItem("history")) || [];
                 
                 var card = $("<div>").addClass("card");
                 var date = $("<h3>").addClass("card-text").text(searchValue + " " + currentDay);
+                var icon = $("<img>").addClass("card-text").attr("src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png" )
                 var wind = $("<p>").addClass("card-text").text("Wind Speed: " + response.wind.speed + " MPH");
                 var humid = $("<p>").addClass("card-text").text("Humidity: " + response.main.humidity + " %");
                 var temp = $("<p>").addClass("card-text").text("Temperature: " + response.main.temp + " degrees");
 
                 var cardBody = $("<div>").addClass("card-body");
-                cardBody.append(date,temp, humid, wind);
+                cardBody.append(date, icon, temp, humid, wind);
 
                 var uvQueryUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=" + yourApiKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon;
                 $.ajax({
                     type: "GET",
                     url: uvQueryUrl,
                     dataType: "JSON", success: function(uvData) {
-                        
-                        var uvIndex = $("<p>").addClass("card-text").text("UV Index " + uvData.value);
-                        cardBody.append(uvIndex);
+                        console.log(uvData)
+                        var uv = $("<p>").text("UV Index: " )
+                        var btn = $("<span>").addClass("btn btn-sm").text(uvData.value)
+                        if (uvData.value < 3){
+                            btn.addClass("btn-success")
+                        } else if (uvData.value < 7) {
+                         btn.addClass("btn-warning")
+                        } else {
+                            btn.addClass("btn-danger")
+                        }
+                        cardBody.append(uv.append(btn))
                     }
-                })
+                        
+                        
+                    }
+                )
 
                 card.append(cardBody);
                 $("#today").prepend(card);
@@ -125,3 +143,5 @@ var history = JSON.parse(window.localStorage.getItem("history")) || [];
 
 
 })
+
+
