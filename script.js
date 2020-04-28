@@ -11,32 +11,21 @@ $(document).ready(function () {
     }
 
     $("#search-btn").on("click", function () {
-
         var searchValue = $("#search-value").val()
-
         searchWeather(searchValue)
-
     })
     $(".history").on("click", "li", function () {
-
         searchWeather($(this).text())
-
     })
     function makeRow(text) {
-
        var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
        $(".history").prepend(li);
-
     }
 
     function searchWeather(searchValue) {
-
         var yourApiKey = "ef8ea8087cbda61b4ebad7da96701611"
-
         var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q="+searchValue + "&appid="+ yourApiKey + "&units=imperial";
-
         $.ajax({
-
             type: "GET",
             url: queryUrl,
             dataType: "JSON", success: function (response) {
