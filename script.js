@@ -42,16 +42,12 @@ $(document).ready(function () {
             dataType: "JSON", success: function (response) {
 
                 if (history.indexOf(searchValue) === -1) {
-
                     history.push(searchValue)
-
                     window.localStorage.setItem("history", JSON.stringify(history))
-
                     makeRow(searchValue);
                 }
-
-                var currentDay = new Date().toString().substr(0, 15);
-                
+                $("#today").empty();
+                var currentDay = new Date().toString().substr(0, 15);                
                 var card = $("<div>").addClass("card");
                 var title = $("<h3>").addClass("card-text").text(searchValue + " " + currentDay);
                 var icon = $("<img>").addClass("card-text icon2").attr("src", "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png" )
@@ -84,11 +80,8 @@ $(document).ready(function () {
                     }
                 )
 
-                card.append(cardBody);
-               
+                card.append(cardBody);               
                 $("#today").prepend(card);
-              
-
                 getForecast(searchValue);
 
 
