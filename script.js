@@ -63,7 +63,7 @@ $(document).ready(function () {
                     }     
                     }
                 )
-
+   
                 card.append(cardBody);               
                 $("#today").prepend(card);
                 getForecast(searchValue);
