@@ -57,7 +57,7 @@ $(document).ready(function () {
 
                 var cardBody = $("<div>").addClass("card-body");
                 cardBody.append(title, icon, temp, humid, wind);
-
+ 
                 var uvQueryUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=" + yourApiKey + "&lat=" + response.coord.lat + "&lon=" + response.coord.lon;
                 $.ajax({
                     type: "GET",
