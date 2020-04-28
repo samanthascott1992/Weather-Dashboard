@@ -8,6 +8,7 @@ $(document).ready(function () {
     }
     for (var i = 0; i < history.length; i++){
         makeRow(history[i])
+        console.log("Are you working?")
     }
 
     $("#search-btn").on("click", function () {
